@@ -63,13 +63,18 @@
         <!-- Dashboard Section -->
         <section id="dashboard" class="section active">
           <div class="topbar">
-            <span class="eyebrow">THURSDAY · 21 AUGUST 2026</span
-            ><span class="user-chip">RR <span>Reservation desk</span></span>
+            <div class="date-block">
+              <span class="eyebrow">TODAY</span>
+              <strong>Thursday · 21 August 2026</strong>
+            </div>
+            <span class="user-chip"
+              ><b>RR</b><span>Reservation desk</span></span
+            >
           </div>
           <div class="hero-copy">
             <div>
               <span class="eyebrow accent">TRAVEL OPERATIONS</span>
-              <h1>Every journey starts<br /><em>with a clear plan.</em></h1>
+              <h1>Every journey starts <em>with a clear plan.</em></h1>
               <p>
                 Book, review, and manage passenger journeys from one calm
                 workspace.
@@ -100,10 +105,13 @@
                 type="button"
                 onclick="showSection('booking')"
               >
-                <span class="card-icon blue">＋</span
-                ><span class="card-arrow">↗</span>
-                <h3>Book a ticket</h3>
-                <p>Create a new passenger reservation in a few steps.</p>
+                <span class="card-topline"
+                  ><span class="card-icon blue">＋</span
+                  ><span class="card-arrow">↗</span></span
+                >
+                <span class="card-label">NEW RESERVATION</span>
+                <strong>Book a ticket</strong>
+                <span>Create a new passenger reservation in a few steps.</span>
               </button>
 
               <button
@@ -111,10 +119,13 @@
                 type="button"
                 onclick="showSection('bookings')"
               >
-                <span class="card-icon green">▤</span
-                ><span class="card-arrow">↗</span>
-                <h3>View bookings</h3>
-                <p>See every active journey and its passenger details.</p>
+                <span class="card-topline"
+                  ><span class="card-icon green">▤</span
+                  ><span class="card-arrow">↗</span></span
+                >
+                <span class="card-label">RESERVATION LOG</span>
+                <strong>View bookings</strong>
+                <span>See every active journey and its passenger details.</span>
               </button>
 
               <button
@@ -122,21 +133,36 @@
                 type="button"
                 onclick="showSection('cancel')"
               >
-                <span class="card-icon coral">×</span
-                ><span class="card-arrow">↗</span>
-                <h3>Cancel a ticket</h3>
-                <p>Find a reservation by ID and release the seat.</p>
+                <span class="card-topline"
+                  ><span class="card-icon coral">×</span
+                  ><span class="card-arrow">↗</span></span
+                >
+                <span class="card-label">MANAGE JOURNEY</span>
+                <strong>Cancel a ticket</strong>
+                <span>Find a reservation by ID and release the seat.</span>
               </button>
             </div>
-            <div class="route-banner">
-              <div>
-                <span class="eyebrow">YOUR NEXT DEPARTURE</span
-                ><strong>Ready when you are.</strong>
+            <div class="dashboard-lower">
+              <div class="route-banner">
+                <div class="route-heading">
+                  <span class="eyebrow">YOUR NEXT DEPARTURE</span>
+                  <strong>Ready when you are.</strong>
+                </div>
+                <div class="route-stops">
+                  <span>DEL</span><i></i><span>MUM</span>
+                </div>
+                <span class="route-meta"
+                  >Flexible planning · Real-time records</span
+                >
               </div>
-              <span class="route-line">DEL ━━━━━━━━━ MUM</span
-              ><span class="route-meta"
-                >Flexible planning · Real-time records</span
-              >
+              <div class="status-panel">
+                <span class="eyebrow">RESERVATION DESK</span>
+                <strong>Everything in one place.</strong>
+                <p>
+                  Plan new journeys, review active bookings, and keep your
+                  passenger records organised.
+                </p>
+              </div>
             </div>
           </div>
         </section>
