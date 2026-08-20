@@ -1,3 +1,9 @@
+const API_BASE_URL = ["localhost", "127.0.0.1"].includes(
+  window.location.hostname,
+)
+  ? "http://localhost:8080"
+  : window.APP_CONFIG.apiBaseUrl;
+
 function showSection(sectionId) {
   const sections = document.querySelectorAll(".section");
 
@@ -52,7 +58,7 @@ if (bookingForm) {
     };
 
     try {
-      const response = await fetch("http://localhost:8080/api/bookings", {
+      const response = await fetch(`${API_BASE_URL}/api/bookings`, {
         method: "POST",
 
         headers: {
@@ -90,7 +96,7 @@ if (bookingForm) {
 
 async function loadBookings() {
   try {
-    const response = await fetch("http://localhost:8080/api/bookings");
+    const response = await fetch(`${API_BASE_URL}/api/bookings`);
 
     if (!response.ok) {
       throw new Error("Failed to load bookings");
@@ -151,7 +157,7 @@ if (cancelForm) {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/api/bookings/${bookingId}`,
+        `${API_BASE_URL}/api/bookings/${bookingId}`,
         {
           method: "DELETE",
         },

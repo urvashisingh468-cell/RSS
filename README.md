@@ -44,6 +44,45 @@ Open `http://localhost:5500`. The API runs at `http://localhost:8080`.
 
 The application defaults to MySQL on `localhost:3306` with database `railway_reservation` and user `root`. Deployment environments can override these values with `MYSQLHOST`, `MYSQLPORT`, `MYSQLDATABASE`, `MYSQLUSER`, and `MYSQLPASSWORD`.
 
+## Deployment Preparation
+
+### Render Backend
+
+The Render service root directory is:
+
+```text
+Backend/railway-reservation/railway-reservation
+```
+
+Use these commands:
+
+```text
+Build: ./mvnw clean package
+Start: java -jar target/railway-reservation-0.0.1-SNAPSHOT.jar
+```
+
+Render provides `PORT`; the backend falls back to `8080` locally. Set these Render environment variables without committing their values:
+
+```text
+JAVA_VERSION=25
+MYSQLHOST
+MYSQLPORT
+MYSQLDATABASE
+MYSQLUSER
+MYSQLPASSWORD
+```
+
+### Vercel Frontend
+
+Set the Vercel project root directory to `Frontend`. This is a static site:
+
+```text
+Build command: none
+Output directory: .
+```
+
+The prepared Render service URL is `https://railway-reservation-api.onrender.com`. If the Render dashboard assigns a different public URL, update only `Frontend/config.js`. The frontend automatically uses `http://localhost:8080` when opened on localhost and the configured Render URL everywhere else.
+
 ## API
 
 | Method   | Endpoint             | Purpose           |

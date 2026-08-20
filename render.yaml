@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: railway-reservation-api
+    runtime: java
+    rootDir: Backend/railway-reservation/railway-reservation
+    buildCommand: ./mvnw clean package
+    startCommand: java -jar target/railway-reservation-0.0.1-SNAPSHOT.jar
+    envVars:
+      - key: JAVA_VERSION
+        value: "25"
+      - key: MYSQLHOST
+        sync: false
+      - key: MYSQLPORT
+        sync: false
+      - key: MYSQLDATABASE
+        sync: false
+      - key: MYSQLUSER
+        sync: false
+      - key: MYSQLPASSWORD
+        sync: false
