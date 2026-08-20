@@ -1,10 +1,9 @@
 services:
   - type: web
     name: railway-reservation-api
-    runtime: java
-    rootDir: Backend/railway-reservation/railway-reservation
-    buildCommand: ./mvnw clean package
-    startCommand: java -jar target/railway-reservation-0.0.1-SNAPSHOT.jar
+    runtime: docker
+    dockerfilePath: Backend/railway-reservation/railway-reservation/Dockerfile
+    dockerContext: Backend/railway-reservation/railway-reservation
     envVars:
       - key: JAVA_VERSION
         value: "25"
