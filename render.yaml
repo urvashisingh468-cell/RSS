@@ -4,6 +4,7 @@ services:
     runtime: docker
     dockerfilePath: Backend/railway-reservation/railway-reservation/Dockerfile
     dockerContext: Backend/railway-reservation/railway-reservation
+    healthCheckPath: /api/bookings
     envVars:
       - key: JAVA_VERSION
         value: "25"
