@@ -1,19 +1,26 @@
 function showSection(sectionId) {
+  const sections = document.querySelectorAll(".section");
 
-    const sections = document.querySelectorAll(".section");
+  sections.forEach(function (section) {
+    section.classList.remove("active");
+  });
 
-    sections.forEach(function(section) {
-        section.classList.remove("active");
-    });
+  const selectedSection = document.getElementById(sectionId);
 
-    const selectedSection = document.getElementById(sectionId);
+  if (selectedSection) {
+    selectedSection.classList.add("active");
+  }
 
-    if (selectedSection) {
-        selectedSection.classList.add("active");
-    }
-    if (sectionId === "bookings"){
-        loadBookings();
-    }
+  document.querySelectorAll(".nav-button").forEach(function (button) {
+    button.classList.toggle(
+      "active",
+      button.getAttribute("onclick") === `showSection('${sectionId}')`,
+    );
+  });
+
+  if (sectionId === "bookings") {
+    loadBookings();
+  }
 }
 
 // Booking form submission
@@ -21,103 +28,82 @@ function showSection(sectionId) {
 const bookingForm = document.getElementById("bookingForm");
 
 if (bookingForm) {
+  bookingForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
 
-    bookingForm.addEventListener("submit", async function(event) {
+    const bookingData = {
+      passengerName: document.getElementById("passengerName").value,
 
-        event.preventDefault();
+      age: parseInt(document.getElementById("age").value),
 
-        const bookingData = {
+      gender: document.getElementById("gender").value,
 
-            passengerName: document.getElementById("passengerName").value,
+      source: document.getElementById("source").value,
 
-            age: parseInt(document.getElementById("age").value),
+      destination: document.getElementById("destination").value,
 
-            gender: document.getElementById("gender").value,
+      journeyDate: document.getElementById("journeyDate").value,
 
-            source: document.getElementById("source").value,
+      trainName: document.getElementById("trainName").value,
 
-            destination: document.getElementById("destination").value,
+      travelClass: document.getElementById("travelClass").value,
 
-            journeyDate: document.getElementById("journeyDate").value,
+      seats: parseInt(document.getElementById("seats").value),
+    };
 
-            trainName: document.getElementById("trainName").value,
+    try {
+      const response = await fetch("http://localhost:8080/api/bookings", {
+        method: "POST",
 
-            travelClass: document.getElementById("travelClass").value,
+        headers: {
+          "Content-Type": "application/json",
+        },
 
-            seats: parseInt(document.getElementById("seats").value)
-        };
+        body: JSON.stringify(bookingData),
+      });
 
+      if (response.ok) {
+        const savedBooking = await response.json();
 
-        try {
+        alert(
+          "🎉 Ticket booked successfully!\n\n" +
+            "Booking ID: " +
+            savedBooking.id,
+        );
 
-            const response = await fetch(
-                "http://localhost:8080/api/bookings",
-                {
-                    method: "POST",
+        bookingForm.reset();
+      } else {
+        alert("❌ Failed to book ticket.");
+      }
+    } catch (error) {
+      console.error(error);
 
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-
-                    body: JSON.stringify(bookingData)
-                }
-            );
-
-
-            if (response.ok) {
-
-                const savedBooking = await response.json();
-
-                alert(
-                    "🎉 Ticket booked successfully!\n\n" +
-                    "Booking ID: " + savedBooking.id
-                );
-
-                bookingForm.reset();
-
-            } else {
-
-                alert("❌ Failed to book ticket.");
-
-            }
-
-        } catch (error) {
-
-            console.error(error);
-
-            alert(
-                "❌ Cannot connect to the backend. " +
-                "Make sure Spring Boot is running."
-            );
-        }
-
-    });
+      alert(
+        "❌ Cannot connect to the backend. " +
+          "Make sure Spring Boot is running.",
+      );
+    }
+  });
 }
 
 // Load all bookings from backend
 
 async function loadBookings() {
+  try {
+    const response = await fetch("http://localhost:8080/api/bookings");
 
-    try {
+    if (!response.ok) {
+      throw new Error("Failed to load bookings");
+    }
 
-        const response = await fetch(
-            "http://localhost:8080/api/bookings"
-        );
+    const bookings = await response.json();
 
-        if (!response.ok) {
-            throw new Error("Failed to load bookings");
-        }
+    const tableBody = document.getElementById("bookingsTableBody");
 
-        const bookings = await response.json();
+    tableBody.innerHTML = "";
 
-        const tableBody =
-            document.getElementById("bookingsTableBody");
-
-        tableBody.innerHTML = "";
-
-        if (bookings.length === 0) {
-
-            tableBody.innerHTML = `
+    if (bookings.length === 0) {
+      tableBody.innerHTML = `
                 <tr>
                     <td colspan="10">
                         No bookings found.
@@ -125,14 +111,13 @@ async function loadBookings() {
                 </tr>
             `;
 
-            return;
-        }
+      return;
+    }
 
-        bookings.forEach(function(booking) {
+    bookings.forEach(function (booking) {
+      const row = document.createElement("tr");
 
-            const row = document.createElement("tr");
-
-            row.innerHTML = `
+      row.innerHTML = `
                 <td>${booking.id}</td>
                 <td>${booking.passengerName}</td>
                 <td>${booking.age}</td>
@@ -145,15 +130,13 @@ async function loadBookings() {
                 <td>${booking.seats}</td>
             `;
 
-            tableBody.appendChild(row);
-        });
+      tableBody.appendChild(row);
+    });
+  } catch (error) {
+    console.error(error);
 
-    } catch (error) {
-
-        console.error(error);
-
-        alert("Unable to load bookings. Make sure backend is running.");
-    }
+    alert("Unable to load bookings. Make sure backend is running.");
+  }
 }
 
 // Cancel ticket
@@ -161,48 +144,37 @@ async function loadBookings() {
 const cancelForm = document.getElementById("cancelForm");
 
 if (cancelForm) {
+  cancelForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
 
-    cancelForm.addEventListener("submit", async function(event) {
+    const bookingId = document.getElementById("cancelBookingId").value;
 
-        event.preventDefault();
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/bookings/${bookingId}`,
+        {
+          method: "DELETE",
+        },
+      );
 
-        const bookingId =
-            document.getElementById("cancelBookingId").value;
+      const message = await response.text();
 
-        try {
+      if (response.ok && message === "Booking cancelled successfully") {
+        alert("✅ Ticket cancelled successfully!");
 
-            const response = await fetch(
-                `http://localhost:8080/api/bookings/${bookingId}`,
-                {
-                    method: "DELETE"
-                }
-            );
+        cancelForm.reset();
 
-            const message = await response.text();
+        loadBookings();
+      } else {
+        alert("❌ " + message);
+      }
+    } catch (error) {
+      console.error(error);
 
-            if (response.ok && message === "Booking cancelled successfully") {
-
-                alert("✅ Ticket cancelled successfully!");
-
-                cancelForm.reset();
-
-                loadBookings();
-
-            } else {
-
-                alert("❌ " + message);
-
-            }
-
-        } catch (error) {
-
-            console.error(error);
-
-            alert(
-                "❌ Cannot connect to the backend. " +
-                "Make sure Spring Boot is running."
-            );
-        }
-
-    });
+      alert(
+        "❌ Cannot connect to the backend. " +
+          "Make sure Spring Boot is running.",
+      );
+    }
+  });
 }

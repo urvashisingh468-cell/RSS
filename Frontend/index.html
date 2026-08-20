@@ -6,6 +6,12 @@
 
     <title>Railway Reservation System</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
 
@@ -13,54 +19,144 @@
     <div class="dashboard">
       <!-- Sidebar -->
       <aside class="sidebar">
-        <h2>Railway Reservation</h2>
+        <div class="brand">
+          <span class="brand-mark">RR</span>
+          <div>
+            <p class="brand-kicker">Control desk</p>
+            <h2>Railway Reserve</h2>
+          </div>
+        </div>
+
+        <p class="sidebar-caption">
+          Plan the journey. Keep the details moving.
+        </p>
 
         <nav>
-          <button onclick="showSection('dashboard')">🏠 Dashboard</button>
+          <p class="nav-label">Workspace</p>
+          <button class="nav-button active" onclick="showSection('dashboard')">
+            <span>⌂</span> Dashboard
+          </button>
 
-          <button onclick="showSection('booking')">🎫 Ticket Booking</button>
+          <button class="nav-button" onclick="showSection('booking')">
+            <span>＋</span> New booking
+          </button>
 
-          <button onclick="showSection('bookings')">📋 My Bookings</button>
+          <button class="nav-button" onclick="showSection('bookings')">
+            <span>▤</span> My bookings
+          </button>
 
-          <button onclick="showSection('cancel')">❌ Cancel Ticket</button>
+          <button class="nav-button" onclick="showSection('cancel')">
+            <span>×</span> Cancel ticket
+          </button>
         </nav>
+
+        <div class="sidebar-footer">
+          <span class="status-dot"></span>
+          <div>
+            <strong>System online</strong><small>MySQL connected</small>
+          </div>
+        </div>
       </aside>
 
       <!-- Main Content -->
       <main class="main-content">
         <!-- Dashboard Section -->
         <section id="dashboard" class="section active">
-          <h1>Welcome to Railway Reservation System</h1>
-
-          <p>Manage your railway tickets easily from one place.</p>
-
-          <div class="cards">
-            <button class="card" type="button" onclick="showSection('booking')">
-              <h3>🎫 Book Ticket</h3>
-              <p>Book your railway ticket.</p>
-            </button>
-
+          <div class="topbar">
+            <span class="eyebrow">THURSDAY · 21 AUGUST 2026</span
+            ><span class="user-chip">RR <span>Reservation desk</span></span>
+          </div>
+          <div class="hero-copy">
+            <div>
+              <span class="eyebrow accent">TRAVEL OPERATIONS</span>
+              <h1>Every journey starts<br /><em>with a clear plan.</em></h1>
+              <p>
+                Book, review, and manage passenger journeys from one calm
+                workspace.
+              </p>
+            </div>
             <button
-              class="card"
+              class="hero-action"
               type="button"
-              onclick="showSection('bookings')"
+              onclick="showSection('booking')"
             >
-              <h3>📋 My Bookings</h3>
-              <p>View your booked tickets.</p>
+              <span>＋</span> Start a booking
             </button>
+          </div>
 
-            <button class="card" type="button" onclick="showSection('cancel')">
-              <h3>❌ Cancel Ticket</h3>
-              <p>Cancel your reservation.</p>
-            </button>
+          <div class="dashboard-grid">
+            <div class="section-heading">
+              <div>
+                <span class="eyebrow">QUICK ACTIONS</span>
+                <h2>What do you need?</h2>
+              </div>
+              <span class="live-pill"
+                ><span class="status-dot"></span> Live workspace</span
+              >
+            </div>
+            <div class="cards">
+              <button
+                class="card"
+                type="button"
+                onclick="showSection('booking')"
+              >
+                <span class="card-icon blue">＋</span
+                ><span class="card-arrow">↗</span>
+                <h3>Book a ticket</h3>
+                <p>Create a new passenger reservation in a few steps.</p>
+              </button>
+
+              <button
+                class="card"
+                type="button"
+                onclick="showSection('bookings')"
+              >
+                <span class="card-icon green">▤</span
+                ><span class="card-arrow">↗</span>
+                <h3>View bookings</h3>
+                <p>See every active journey and its passenger details.</p>
+              </button>
+
+              <button
+                class="card"
+                type="button"
+                onclick="showSection('cancel')"
+              >
+                <span class="card-icon coral">×</span
+                ><span class="card-arrow">↗</span>
+                <h3>Cancel a ticket</h3>
+                <p>Find a reservation by ID and release the seat.</p>
+              </button>
+            </div>
+            <div class="route-banner">
+              <div>
+                <span class="eyebrow">YOUR NEXT DEPARTURE</span
+                ><strong>Ready when you are.</strong>
+              </div>
+              <span class="route-line">DEL ━━━━━━━━━ MUM</span
+              ><span class="route-meta"
+                >Flexible planning · Real-time records</span
+              >
+            </div>
           </div>
         </section>
 
         <!-- Booking Section -->
         <section id="booking" class="section">
-          <h1>Ticket Booking</h1>
-
-          <p>Enter passenger details to book your railway ticket.</p>
+          <div class="page-heading">
+            <div>
+              <span class="eyebrow accent">NEW RESERVATION</span>
+              <h1>Book a ticket</h1>
+              <p>Passenger details, route, and seat preferences.</p>
+            </div>
+            <button
+              class="back-button"
+              type="button"
+              onclick="showSection('dashboard')"
+            >
+              ← Back to dashboard
+            </button>
+          </div>
 
           <form id="bookingForm">
             <div class="form-group">
@@ -125,9 +221,20 @@
 
         <!-- Bookings Section -->
         <section id="bookings" class="section">
-          <h1>My Bookings</h1>
-
-          <p>Here you can view all your booked tickets.</p>
+          <div class="page-heading">
+            <div>
+              <span class="eyebrow accent">RESERVATION LOG</span>
+              <h1>My bookings</h1>
+              <p>Your active passenger journeys in one view.</p>
+            </div>
+            <button
+              class="back-button"
+              type="button"
+              onclick="showSection('dashboard')"
+            >
+              ← Back to dashboard
+            </button>
+          </div>
 
           <div class="table-container">
             <table id="bookingsTable">
@@ -155,9 +262,20 @@
 
         <!-- Cancel Section -->
         <section id="cancel" class="section">
-          <h1>Cancel Ticket</h1>
-
-          <p>Enter your Booking ID to cancel your ticket.</p>
+          <div class="page-heading">
+            <div>
+              <span class="eyebrow accent">MANAGE JOURNEY</span>
+              <h1>Cancel a ticket</h1>
+              <p>Enter a booking ID to cancel its reservation.</p>
+            </div>
+            <button
+              class="back-button"
+              type="button"
+              onclick="showSection('dashboard')"
+            >
+              ← Back to dashboard
+            </button>
+          </div>
 
           <form id="cancelForm">
             <div class="form-group">
