@@ -8,12 +8,16 @@ services:
       - key: JAVA_VERSION
         value: "25"
       - key: MYSQLHOST
-        sync: false
+        value: railway-reservation-db-urvashisingh468-381b.d.aivencloud.com
       - key: MYSQLPORT
-        sync: false
+        value: "24679"
       - key: MYSQLDATABASE
-        sync: false
+        value: defaultdb
       - key: MYSQLUSER
-        sync: false
+        value: avnadmin
+      - key: MYSQLSSLMODE
+        value: REQUIRED
       - key: MYSQLPASSWORD
+        sync: false
+      - key: FRONTEND_URL
         sync: false

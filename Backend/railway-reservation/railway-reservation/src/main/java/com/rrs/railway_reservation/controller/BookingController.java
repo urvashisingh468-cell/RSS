@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/bookings")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "${FRONTEND_URL:http://localhost:5500}")
 public class BookingController {
 
     private final BookingRepository bookingRepository;

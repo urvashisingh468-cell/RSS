@@ -1,4 +1,5 @@
 // Public frontend deployment configuration. Never put database credentials here.
 window.APP_CONFIG = Object.freeze({
-  apiBaseUrl: "https://railway-reservation-api.onrender.com",
+  // Set this to the confirmed Render service URL before deploying the frontend to Vercel.
+  apiBaseUrl: "",
 });

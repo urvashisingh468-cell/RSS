@@ -81,7 +81,7 @@ Build command: none
 Output directory: .
 ```
 
-The prepared Render service URL is `https://railway-reservation-api.onrender.com`. If the Render dashboard assigns a different public URL, update only `Frontend/config.js`. The frontend automatically uses `http://localhost:8080` when opened on localhost and the configured Render URL everywhere else.
+After Render creates the service, copy its confirmed public URL into `Frontend/config.js`. The frontend automatically uses `http://localhost:8080` when opened on localhost and the configured Render URL everywhere else. Do not deploy the Vercel frontend until this value is set.
 
 ## API
 

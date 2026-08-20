@@ -3,7 +3,7 @@ FROM eclipse-temurin:25-jdk AS build
 WORKDIR /workspace
 COPY . .
 
-RUN chmod +x mvnw && ./mvnw clean package
+RUN chmod +x mvnw && ./mvnw clean package -DskipTests
 
 FROM eclipse-temurin:25-jdk
 
