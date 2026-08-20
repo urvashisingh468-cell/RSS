@@ -9,7 +9,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/bookings")
-@CrossOrigin(origins = "${FRONTEND_URL:http://localhost:5500}")
+@CrossOrigin(origins = {
+    "https://rss-one.vercel.app",
+    "http://localhost:5500",
+    "http://127.0.0.1:5500"
+})
 public class BookingController {
 
     private final BookingRepository bookingRepository;
